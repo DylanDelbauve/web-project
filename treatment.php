@@ -8,8 +8,8 @@ try {
    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    $req = null;
 
-   if (strcmp($selection,"musee") == 0){
-      if(preg_match("/\d{5}/",$research)) {
+   if (strcmp($selection, "musee") == 0) {
+      if (preg_match("/\d{5}/", $research)) {
          $req = $conn->prepare("
          SELECT nom, adresse, codepostal, commune, latitude, longitude, telephone, courriel, siteinternet, descriptiflong
          FROM musees 
@@ -17,27 +17,50 @@ try {
          ");
          $req->bindParam(':CP', $research);
          $req->execute();
-         while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $temp = hydrateMusee($data);
             echo json_encode($temp);
          }
-      } else if(preg_match("/[A-z]/",$research)) {
+      } else if (preg_match("/[A-z]/", $research)) {
          $req = $conn->prepare("
          SELECT nom, adresse, codepostal, commune, latitude, longitude, telephone, courriel, siteinternet, descriptiflong
          FROM musees 
-         WHERE commune or nom LIKE CONCAT('%',:commune,'%')
+         WHERE commune LIKE CONCAT('%',:commune,'%')
          ");
          $req->bindParam(':commune', $research);
          $req->execute();
-         while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $temp = hydrateMusee($data);
             echo json_encode($temp);
+         }
+      } 
+   } else if (strcmp($selection, "monumentshistoriques") == 0) {
+      if (preg_match("/\d{2}/", $research)) {
+         $req = $conn->prepare("
+      SELECT designation, commune, latitude, longitude, description
+      FROM monumentshistoriques 
+      WHERE departement=:departement
+      ");
+         $req->bindParam(':departement', $research);
+         $req->execute();
+         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $temp = hydrateMonument($data);
+            echo json_encode($temp);
+         }
+      } else if (preg_match("/[A-z]/", $research)) {
+         $req = $conn->prepare("
+      SELECT designation, departement, commune, latitude, longitude, description
+      FROM monumentshistoriques 
+      WHERE commune LIKE CONCAT('%',:commune,'%')
+      ");
+         $req->bindParam(':commune', $research);
+         $req->execute();
+         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $temp = hydrateMonument($data);
+            echo json_encode($temp);
+         }
       }
-   } else if(strcmp($selection,"monumentshistoriques") == 0) {
-
    }
-}
-
 } catch (PDOException $e) {
    echo "Connection failed: " . $e->getMessage();
 }
@@ -63,8 +86,7 @@ function hydrateMonument($var)
 {
    $data = array(
       "nom" => $var['designation'],
-      "codepostal" => $var['codepostal'],
-      "commune" => $var['departement'],
+      "commune" => $var['commune'],
       "latitude" => $var['latitude'],
       "longitude" => $var['longitude'],
       "descriptiflong" => $var['description']

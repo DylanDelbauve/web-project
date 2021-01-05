@@ -12,8 +12,13 @@ function initMap() {
   });
 }
 
-$("search").onsubmit = function (event) {
-  event.preventDefault();
+document.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    research();
+  }
+})
+
+function research() {
   resetMarkers();
   var request = new XMLHttpRequest();
   request.onreadystatechange = function () {
@@ -43,7 +48,7 @@ $("search").onsubmit = function (event) {
     true
   );
   request.send();
-};
+}
 
 function createMarker(params) {
   return new google.maps.Marker({
@@ -73,4 +78,10 @@ function resetMarkers() {
     e.setMap(null);
     e = null;
   });
+  
+}
+
+function clearMap() {
+  $("research").value = "";
+  resetMarkers();
 }
