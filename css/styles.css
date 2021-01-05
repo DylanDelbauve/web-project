@@ -2,13 +2,8 @@ html, body {
     overflow-x: hidden; 
 }
 
-.fluid-container {
-    display: grid;
-    place-content: center;  
-}
-
 #map {
-    height: 100vh;
+    height: 92vh;
     width: 100vw;
 }
 

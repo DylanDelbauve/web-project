@@ -5,6 +5,7 @@ function $(id) {
 let map;
 let markers = [];
 
+
 function initMap() {
   map = new google.maps.Map($("map"), {
     center: { lat: 47.242249900590146, lng: 6.016386412890068 },
@@ -62,6 +63,7 @@ function createMarker(params) {
       lng: parseFloat(params.longitude),
     },
     title: params.nom,
+    icon: 'icons/'+params.categorie+'.png'
   })
 }
 

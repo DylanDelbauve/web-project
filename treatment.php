@@ -37,9 +37,9 @@ try {
    } else if (strcmp($selection, "monumentshistoriques") == 0) {
       if (preg_match("/\d{2}/", $research)) {
          $req = $conn->prepare("
-      SELECT designation, commune, latitude, longitude, description
+      SELECT designation, commune, latitude, longitude, description, catégorie
       FROM monumentshistoriques 
-      WHERE departement=:departement
+      WHERE département=:departement
       ");
          $req->bindParam(':departement', $research);
          $req->execute();
@@ -49,7 +49,7 @@ try {
          }
       } else if (preg_match("/[A-z]/", $research)) {
          $req = $conn->prepare("
-      SELECT designation, departement, commune, latitude, longitude, description
+      SELECT designation, département, commune, latitude, longitude, description, catégorie
       FROM monumentshistoriques 
       WHERE commune LIKE CONCAT('%',:commune,'%')
       ");
@@ -77,7 +77,8 @@ function hydrateMusee($var)
       "telephone" => $var['telephone'],
       "courriel" => $var['courriel'],
       "siteinternet" => $var['siteinternet'],
-      "descriptiflong" => $var['descriptiflong']
+      "descriptiflong" => $var['descriptiflong'],
+      "categorie" => "musee"
    );
    return $data;
 }
@@ -89,7 +90,8 @@ function hydrateMonument($var)
       "commune" => $var['commune'],
       "latitude" => $var['latitude'],
       "longitude" => $var['longitude'],
-      "descriptiflong" => $var['description']
+      "descriptiflong" => $var['description'],
+      "categorie" => $var['catégorie']
    );
    return $data;
 }
