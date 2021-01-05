@@ -24,13 +24,16 @@ function research() {
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText === "") {
-        alert("Aucune donnée trouvée");
+        $("result-counter").innerText = "Aucun résultat";
       } else {
         var dataTemp = this.responseText.split("}");
         var data = parseJSON(dataTemp);
         data.forEach((e) => {
           markers.push(createMarker(e));
         });
+        $("result-counter").innerText = data.length+" résultat";
+        if (data.length > 1)
+        $("result-counter").innerText +='s';
         map.setCenter({
           lat: parseFloat(data[0].latitude),
           lng: parseFloat(data[0].longitude),
@@ -84,4 +87,5 @@ function resetMarkers() {
 function clearMap() {
   $("research").value = "";
   resetMarkers();
+  $("result-counter").innerText = "Aucun résultat";
 }
