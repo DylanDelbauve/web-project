@@ -1,48 +1,49 @@
-html, body {
-    overflow-x: hidden; 
+html,
+body {
+  overflow-x: hidden;
 }
 
 #map {
-    height: 92vh;
-    width: 100vw;
+  height: 92vh;
+  width: 100vw;
 }
 
 .research {
-    border: rgb(211, 211, 211) 1px solid;
-    border-radius: 25px;
+  border: rgb(211, 211, 211) 1px solid;
+  border-radius: 25px;
 }
 
 .research-select {
-    border: none;
-    border-radius: 25px 0 0 25px;
-    padding: 5px 0 5px 5px;
-    margin-right: 0;
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
-    appearance:none;
-    text-align: center;
+  border: none;
+  border-radius: 25px 0 0 25px;
+  padding: 5px 0 5px 5px;
+  margin-right: 0;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+  text-align: center;
 }
 
 .research-option {
-    border: none;
+  border: none;
 }
 
 option {
-    border: none;
+  border: none;
 }
 
 .research-bar {
-    border: none;
-    margin-left: 0;
-    padding: 5px 0 5px 0;
+  border: none;
+  margin-left: 0;
+  padding: 5px 0 5px 0;
 }
 
 .research-bar:focus {
-    border: none;
+  border: none;
 }
 
 .research-submit {
-    border: none;
-    border-radius: 0 25px 25px 0;
-    padding: 5px 10px 5px 5px;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  padding: 5px 10px 5px 5px;
 }

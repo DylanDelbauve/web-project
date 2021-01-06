@@ -18,4 +18,9 @@ A la position du lieu, vous placerez sur la carte le pictogramme correspondant �
 Ce projet utilise Bootstrap version 5 et Google Maps pour fonctionner.
 Il repose sur un server web utilisant PHP (7.4 ou plus récent) et d'une base de données MySQL (ou MariaDB).
 
-Attention, l'utilisation des scripts SQL fournis est **primordial**, ceux-ci ayant été modifié par rapport au sujet pour des raisons de problème d'encodage et donc d'utilisation. Merci de votre compréhension.
+Attention, l'utilisation des scripts SQL fournis est **primordiale**, ceux-ci ayant été modifié par rapport au sujet pour des raisons de problème d'encodage et donc d'utilisation. Merci de votre compréhension.
+
+
+## Utilisation
+
+Le champ doit être rempli ou d'un nom de commune ou d'un CP (pour les musées) ou d'un numéro de département (pour les monuments). La recherche s'effectue avec le bouton prévu à cet effet. Le bouton *Clear* efface les marqueurs et vide le champ de recherche. Les marqueurs sont cliquables pour plus d'infos.

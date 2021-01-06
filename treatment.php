@@ -100,5 +100,3 @@ function hydrateMonument($var)
    );
    return $data;
 }
-
-?>

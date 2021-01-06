@@ -87,7 +87,7 @@ function createMarker(params) {
     </div>
   </div>
   `;
-  
+
   var infoWin = new google.maps.InfoWindow({
     content: contentStr,
   });
