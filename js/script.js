@@ -1,3 +1,4 @@
+// Simplifie la selection par id
 function $(id) {
   return document.getElementById(id);
 }
@@ -18,6 +19,7 @@ document.addEventListener("keypress", (e) => {
   }
 });
 
+// Envoie une requête Ajax Avec les informations de recherche
 function research() {
   resetMarkers();
   var request = new XMLHttpRequest();
@@ -52,6 +54,7 @@ function research() {
   request.send();
 }
 
+// Créé le marqueur et sa description à partir d'un objet JSON
 function createMarker(params) {
   var infos;
   if (params.hasOwnProperty("courriel")) {
@@ -101,8 +104,10 @@ function createMarker(params) {
   marker.addListener("click", () => {
     infoWin.open(map, marker);
   });
+  return marker;
 }
 
+// Converti les données de la requête Ajax en JSON
 function parseJSON(params) {
   var res = [];
   params.forEach((e) => {
@@ -114,6 +119,7 @@ function parseJSON(params) {
   return res;
 }
 
+// Permet de retirer tous les marqueurs
 function resetMarkers() {
   markers.forEach((e) => {
     e.setMap(null);
@@ -121,6 +127,7 @@ function resetMarkers() {
   });
 }
 
+// Retire les marqueurs, et vide les différents champs
 function clearMap() {
   $("research").value = "";
   resetMarkers();

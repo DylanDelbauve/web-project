@@ -4,7 +4,7 @@ $selection = $_REQUEST["selection"];
 $research = $_REQUEST["research"];
 
 try {
-   $conn = new PDO("mysql:host=localhost;dbname=web-project", "webproject", "123456");
+   require_once('connection.php');
    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    $req = null;
 
@@ -65,6 +65,7 @@ try {
    echo "Connection failed: " . $e->getMessage();
 }
 
+// Créé un objet JSON musée à partir des données de la requête
 function hydrateMusee($var)
 {
    $data = array(
@@ -83,6 +84,7 @@ function hydrateMusee($var)
    return $data;
 }
 
+// Créé un objet JSON monument à partir des données de la requête
 function hydrateMonument($var)
 {
    $data = array(
@@ -98,3 +100,5 @@ function hydrateMonument($var)
    );
    return $data;
 }
+
+?>
