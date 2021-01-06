@@ -5,7 +5,6 @@ function $(id) {
 let map;
 let markers = [];
 
-
 function initMap() {
   map = new google.maps.Map($("map"), {
     center: { lat: 47.242249900590146, lng: 6.016386412890068 },
@@ -17,7 +16,7 @@ document.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     research();
   }
-})
+});
 
 function research() {
   resetMarkers();
@@ -32,9 +31,8 @@ function research() {
         data.forEach((e) => {
           markers.push(createMarker(e));
         });
-        $("result-counter").innerText = data.length+" résultat";
-        if (data.length > 1)
-        $("result-counter").innerText +='s';
+        $("result-counter").innerText = data.length + " résultat";
+        if (data.length > 1) $("result-counter").innerText += "s";
         map.setCenter({
           lat: parseFloat(data[0].latitude),
           lng: parseFloat(data[0].longitude),
@@ -55,7 +53,42 @@ function research() {
 }
 
 function createMarker(params) {
-  return new google.maps.Marker({
+  var infos;
+  if (params.hasOwnProperty("courriel")) {
+    infos = `
+    <p>Adresse : ${params.adresse},${params.commune}</p>
+    <p>Téléphone : ${params.telephone}</p>
+    <p>E-mail : ${params.courriel}</p>
+    <p>Site web : ${params.siteinternet}</p>
+    `;
+  } else {
+    infos = `
+    <p>Propriétaire : ${params.proprietaire}</p>
+    <p>Siècle : ${params.siecle}</p>
+    <p>Auteur : ${params.auteur}</p>
+    `;
+  }
+  var contentStr = `
+  <div id="content">
+    <div id="siteNotice">
+    </div>
+    <h2 id="firstHeading" class="firstHeading">${params.nom}</h2>
+    <div id="bodyContent">
+      <p>
+          ${params.descriptiflong}
+      </p>
+      <hr>
+      <div>
+          ${infos}
+      </div>
+    </div>
+  </div>
+  `;
+
+  var infoWin = new google.maps.InfoWindow({
+    content: contentStr,
+  });
+  var marker = new google.maps.Marker({
     map,
     animation: google.maps.Animation.DROP,
     position: {
@@ -63,8 +96,11 @@ function createMarker(params) {
       lng: parseFloat(params.longitude),
     },
     title: params.nom,
-    icon: 'icons/'+params.categorie+'.png'
-  })
+    icon: "icons/" + params.categorie + ".png",
+  });
+  marker.addListener("click", () => {
+    infoWin.open(map, marker);
+  });
 }
 
 function parseJSON(params) {
@@ -83,11 +119,10 @@ function resetMarkers() {
     e.setMap(null);
     e = null;
   });
-  
 }
 
 function clearMap() {
   $("research").value = "";
   resetMarkers();
-  $("result-counter").innerText = "Aucun résultat";
+  $("result-counter").innerText = "";
 }
