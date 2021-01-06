@@ -20,6 +20,8 @@ Il repose sur un server web utilisant PHP (7.4 ou plus récent) et d'une base de
 
 Attention, l'utilisation des scripts SQL fournis est **primordiale**, ceux-ci ayant été modifié par rapport au sujet pour des raisons de problème d'encodage et donc d'utilisation. Merci de votre compréhension.
 
+P.S. : La connexion à la base de donnée est gérée dans le fichier `connection.php`.
+
 
 ## Utilisation
 
