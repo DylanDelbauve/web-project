@@ -11,3 +11,11 @@ Vous devrez ensuite écrire un site WEB qui soit "responsive", en utilisant le f
 
 Vous devrez positionner les résultats, en fonction de la latitude et de la longitude, sur une carte en utilisant l'API de Google Maps.
 A la position du lieu, vous placerez sur la carte le pictogramme correspondant à sa catégorie.
+
+
+## Dépendances
+
+Ce projet utilise Bootstrap version 5 et Google Maps pour fonctionner.
+Il repose sur un server web utilisant PHP (7.4 ou plus récent) et d'une base de données MySQL (ou MariaDB).
+
+Attention, l'utilisation des scripts SQL fournis est **primordial**, ceux-ci ayant été modifié par rapport au sujet pour des raisons de problème d'encodage et donc d'utilisation. Merci de votre compréhension.
