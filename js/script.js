@@ -87,7 +87,11 @@ function createMarker(params) {
     </div>
   </div>
   `;
+  var icon = "icons/" + params.categorie + ".png";
 
+  if (params.categorie.localeCompare("sitearcheologique")) //fix pour les sites archéologiques
+    icon = "icons/sitearcheologique.png";
+  
   var infoWin = new google.maps.InfoWindow({
     content: contentStr,
   });
@@ -99,7 +103,7 @@ function createMarker(params) {
       lng: parseFloat(params.longitude),
     },
     title: params.nom,
-    icon: "icons/" + params.categorie + ".png",
+    icon: icon,
   });
   marker.addListener("click", () => {
     infoWin.open(map, marker);
